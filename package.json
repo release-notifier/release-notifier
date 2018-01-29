@@ -20,7 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.4",
-    "probot": "^5.0.0"
+    "probot": "^5.0.0",
+    "semver": "^5.5.0"
   },
   "devDependencies": {
     "nodemon": "^1.14.11",
