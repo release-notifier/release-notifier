@@ -12,8 +12,8 @@ module.exports = (robot) => {
 }
 
 async function handleRelease (robot, context) {
-  // console.log(context.payload)
-  console.log(context.payload.release.body)
+  // robot.log(context.payload)
+  robot.log(context.payload.release.body)
   
   const owner = context.payload.repository.owner.login
   const repo = context.payload.repository.name
@@ -24,7 +24,7 @@ async function handleRelease (robot, context) {
   })
 
   // TODO: will break on repo with single release
-  console.log(latestRelease.tag_name, previousRelease.tag_name)
+  robot.log(latestRelease.tag_name, previousRelease.tag_name)
   
   const {data: commits} = await context.github.repos.getCommits({
     owner,
@@ -33,7 +33,7 @@ async function handleRelease (robot, context) {
     since: previousRelease.created_at
   })
   
-  console.log(commits.length)
+  robot.log(commits.length)
     
   const pullRequests = chain(commits)
     .map(async commit => {
