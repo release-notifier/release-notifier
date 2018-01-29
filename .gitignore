@@ -1,0 +1,4 @@
+.env
+.npmrc
+node_modules
+*.pem

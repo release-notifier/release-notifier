@@ -1,0 +1,30 @@
+{
+  "name": "release-notifier-bot",
+  "version": "0.0.0-development",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "probot run ./index.js",
+    "test": "standard",
+    "semantic-release": "semantic-release",
+    "dev": "nodemon --exec 'npm start'"
+  },
+  "repository": "https://github.com/github-release-notifier/release-notifier-bot",
+  "keywords": [
+    "GitHub",
+    "releases",
+    "probot",
+    "probot-plugin"
+  ],
+  "author": "Zeke Sikelianos (http://zeke.sikelianos.com)",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "probot": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11",
+    "smee-client": "^1.0.1",
+    "standard": "^10.0.3"
+  }
+}
