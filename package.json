@@ -9,7 +9,7 @@
     "semantic-release": "semantic-release",
     "dev": "nodemon --exec 'npm start'"
   },
-  "repository": "https://github.com/github-release-notifier/release-notifier-bot",
+  "repository": "https://github.com/release-notifier/release-notifier",
   "keywords": [
     "GitHub",
     "releases",
@@ -25,7 +25,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.14.11",
-    "smee-client": "^1.0.1",
     "standard": "^10.0.3"
   }
 }
