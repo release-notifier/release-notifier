@@ -11,14 +11,13 @@ module.exports = (robot) => {
 async function handleRelease (robot, context) {
   const owner = context.payload.repository.owner.login
   const repo = context.payload.repository.name
-  const currentVersion = tagNameToVersionNumber(context.payload.release.tag_name)
   const {data: releaseData} = await context.github.repos.getReleases({
     owner,
     repo,
     per_page: 50
   })
 
-  recentReleases = releaseData
+  const recentReleases = releaseData
     .map(release => {
       release.version = tagNameToVersionNumber(release.tag_name)
       return release
@@ -28,11 +27,11 @@ async function handleRelease (robot, context) {
 
   const currentRelease = recentReleases
     .find(release => release.tag_name === context.payload.release.tag_name)
-  
+
   const previousReleases = recentReleases
     .filter(release => !release.prerelease)
     .filter(release => semver.lt(release.version, currentRelease.version))
-  
+
   if (!previousReleases.length) {
     robot.log('aborting; no previous releases found with a lower semnantic version')
     return
@@ -46,15 +45,15 @@ async function handleRelease (robot, context) {
     sha: currentRelease.tag_name,
     since: previousRelease.created_at
   })
-  
+
   robot.log(`commits between ${previousRelease.version} and ${currentRelease.version}: ${commits.length}`)
 
   // Create a nice title without redundant version info
   currentRelease.title = currentRelease.name.includes(currentRelease.version)
     ? currentRelease.name
     : `${currentRelease.tag_name}: ${currentRelease.name}`
-    
-  const pullRequests = chain(commits)
+
+  chain(commits)
     .map(async commit => {
       const {data: {items: [pullRequest]}} = await context.github.search.issues({q: commit.sha})
       return pullRequest
@@ -72,6 +71,6 @@ async function handleRelease (robot, context) {
     .value()
 }
 
-function tagNameToVersionNumber(tag) {
+function tagNameToVersionNumber (tag) {
   return tag.replace(/^v/i, '')
 }
