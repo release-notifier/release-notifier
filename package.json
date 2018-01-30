@@ -7,7 +7,8 @@
     "start": "probot run ./index.js",
     "test": "standard",
     "semantic-release": "semantic-release",
-    "dev": "nodemon --exec 'npm start'"
+    "dev": "nodemon --exec 'npm start'",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": "https://github.com/release-notifier/release-notifier",
   "keywords": [
@@ -25,6 +26,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.14.11",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "travis-deploy-once": "^4.3.3",
+    "semantic-release": "^12.4.1"
   }
 }
