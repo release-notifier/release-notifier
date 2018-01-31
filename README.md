@@ -2,9 +2,11 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/release-notifier/release-notifier.svg)](https://greenkeeper.io/)
 
-A [probot](https://github.com/probot/probot) that leaves helpful comments on your pull requests when they land in a release.
+A [Probot](https://github.com/probot/probot) that leaves helpful comments on your pull requests when they land in a release.
 
 ![screenshot](screenshot.jpg)
+
+This bot is designed for use with projects that are using [GitHub Releases](https://help.github.com/articles/creating-releases/) and [Semantic Versioning](https://semver.org/).
 
 ## Install
 
