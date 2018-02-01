@@ -11,6 +11,14 @@ module.exports = (robot) => {
 async function handleRelease (robot, context) {
   const owner = context.payload.repository.owner.login
   const repo = context.payload.repository.name
+
+  // log messages with a user/repo prefix
+  function log (msg) {
+    robot.log('%s/%s: %s', owner, repo, msg)
+  }
+
+  log(`${context.payload.release.tag_name} published!`)
+
   const {data: releaseData} = await context.github.repos.getReleases({
     owner,
     repo,
@@ -33,11 +41,13 @@ async function handleRelease (robot, context) {
     .filter(release => semver.lt(release.version, currentRelease.version))
 
   if (!previousReleases.length) {
-    robot.log('aborting; no previous releases found with a lower semnantic version')
+    log('no previous releases found with a lower semantic version (aborting)')
     return
   }
 
   const previousRelease = previousReleases[0]
+
+  log(`previous release was ${previousRelease.tag_name} (${previousRelease.created_at})`)
 
   const {data: commits} = await context.github.repos.getCommits({
     owner,
@@ -46,7 +56,7 @@ async function handleRelease (robot, context) {
     since: previousRelease.created_at
   })
 
-  robot.log(`commits between ${previousRelease.version} and ${currentRelease.version}: ${commits.length}`)
+  log(`commits between versions: ${commits.length}`)
 
   // Create a nice title without redundant version info
   currentRelease.title = currentRelease.name.includes(currentRelease.version)
@@ -61,6 +71,7 @@ async function handleRelease (robot, context) {
     .compact()
     .uniqBy('number')
     .forEach(async pullRequest => {
+      log(`PR: ${(await pullRequest).number}`)
       await context.github.issues.createComment({
         owner,
         repo,

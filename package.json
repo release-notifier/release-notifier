@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "probot run ./index.js",
-    "test": "standard",
+    "test": "standard --fix",
     "semantic-release": "semantic-release",
     "dev": "nodemon --exec 'npm start'",
     "travis-deploy-once": "travis-deploy-once"
