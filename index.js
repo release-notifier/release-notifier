@@ -63,11 +63,12 @@ async function handleRelease (robot, context) {
     .compact()
     .uniqBy('number')
     .forEach(async pullRequest => {
-      context.log(`PR: ${(await pullRequest).number}`)
+      const pr = await pullRequest
+      context.log(`PR: ${pr.number}`)
       await context.github.issues.createComment({
         owner,
         repo,
-        number: (await pullRequest).number,
+        number: pr.number,
         body: `This PR landed in [${currentRelease.title}](${currentRelease.html_url}) :tada:`
       })
     })
