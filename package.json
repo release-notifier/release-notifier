@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "nodemon": "^1.14.11",
-    "standard": "^10.0.3",
+    "standard": "^11.0.0",
     "travis-deploy-once": "^4.3.3",
     "semantic-release": "^12.4.1"
   }
