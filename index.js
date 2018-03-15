@@ -78,6 +78,7 @@ async function handleRelease (robot, context) {
         body: `This PR landed in [${currentRelease.title}](${currentRelease.html_url}) :tada:`
       })
     })
+    .value()
 }
 
 function tagNameToVersionNumber (tag) {
