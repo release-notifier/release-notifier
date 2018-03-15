@@ -65,7 +65,7 @@ async function handleRelease (robot, context) {
   const pulls = chain(commits)
     .map(async commit => {
       const res = await context.github.search.issues({q: commit.sha})
-      console.log('res', res)
+      // console.log('res', res)
       const {data: {items: [pullRequest]}} = res
       console.log('pullRequest', pullRequest)
       return pullRequest
@@ -73,17 +73,18 @@ async function handleRelease (robot, context) {
     .compact()
     .uniqBy('number')
     .value()
+  
+  console.log('\n\n\npulls', pulls)
 
-    // .forEach(async pullRequest => {
-    //   log(`pull request number: ${pullRequest.number}`)
-    //   await context.github.issues.createComment({
-    //     owner,
-    //     repo,
-    //     number: pullRequest.number,
-    //     body: `This PR landed in [${currentRelease.title}](${currentRelease.html_url}) :tada:`
-    //   })
-    // })
-    // .value()
+  for (pull of pulls) {
+    log(`pull request number: ${pull.number}`)
+    await context.github.issues.createComment({
+      owner,
+      repo,
+      number: pull.number,
+      body: `This PR landed in [${currentRelease.title}](${currentRelease.html_url}) :tada:`
+    })
+  }
 }
 
 function tagNameToVersionNumber (tag) {
