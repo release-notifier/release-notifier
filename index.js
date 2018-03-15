@@ -10,7 +10,7 @@ async function handleRelease (robot, context) {
   const repo = context.payload.repository.name
 
   function log (message) {
-    robot.log.debug('%s/%s: %s', owner, repo, message)
+    robot.log('%s/%s: %s', owner, repo, message)
   }
 
   log(`${context.payload.release.tag_name} published!`)
@@ -65,9 +65,9 @@ async function handleRelease (robot, context) {
   const pulls = chain(commits)
     .map(async commit => {
       const res = await context.github.search.issues({q: commit.sha})
-      console.debug('res', res)
+      console.log('res', res)
       const {data: {items: [pullRequest]}} = res
-      console.debug('pullRequest', pullRequest)
+      console.log('pullRequest', pullRequest)
       return pullRequest
     })
     .compact()
