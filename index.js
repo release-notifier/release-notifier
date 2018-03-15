@@ -10,7 +10,7 @@ async function handleRelease (robot, context) {
   const repo = context.payload.repository.name
 
   function log (message) {
-    robot.log('%s/%s: %s', owner, repo, message)
+    robot.log.debug('%s/%s: %s', owner, repo, message)
   }
 
   log(`${context.payload.release.tag_name} published!`)
@@ -53,11 +53,14 @@ async function handleRelease (robot, context) {
   })
 
   log(`commits between versions: ${commits.length}`)
+  console.log(commits)
 
   // Create a nice title without redundant version info
   currentRelease.title = currentRelease.name.includes(currentRelease.version)
     ? currentRelease.name
     : `${currentRelease.tag_name}: ${currentRelease.name}`
+
+  log(`release title: ${currentRelease.title}`)
 
   chain(commits)
     .map(async commit => {
