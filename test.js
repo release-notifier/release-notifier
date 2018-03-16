@@ -1,4 +1,4 @@
-require('dotenv-safe').load()
+if (!process.env.CI) require('dotenv-safe').load()
 
 const profileRelease = require('./lib/profile-release')
 
