@@ -14,9 +14,9 @@ async function handleRelease (robot, context) {
   }
 
   const profile = profileRelease({
-    owner, 
-    repo, 
-    tagName, 
+    owner,
+    repo,
+    tagName,
     github: context.github
   }).catch(err => log(err))
 
@@ -24,7 +24,7 @@ async function handleRelease (robot, context) {
 
   const {currentRelease, pulls} = profile
 
-  for (pull of pulls) {
+  for (const pull of pulls) {
     await context.github.issues.createComment({
       owner,
       repo,
