@@ -33,5 +33,10 @@
     "semantic-release": "^15.0.0",
     "standard": "^11.0.0",
     "travis-deploy-once": "^4.3.3"
+  },
+  "standard": {
+    "env": {
+      "jest": true
+    }
   }
 }
