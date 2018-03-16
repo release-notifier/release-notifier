@@ -53,7 +53,6 @@ async function handleRelease (robot, context) {
   })
 
   log(`commits between versions: ${commits.length}`)
-  console.log(commits)
 
   // Create a nice title without redundant version info
   currentRelease.title = currentRelease.name.includes(currentRelease.version)
@@ -62,17 +61,12 @@ async function handleRelease (robot, context) {
 
   log(`release title: ${currentRelease.title}`)
 
-  const pulls = chain(commits)
-    .map(async commit => {
-      const res = await context.github.search.issues({q: commit.sha})
-      // console.log('res', res)
-      const {data: {items: [pullRequest]}} = res
-      console.log('pullRequest', pullRequest)
-      return pullRequest
-    })
-    .compact()
-    .uniqBy('number')
-    .value()
+  let pulls = []
+  for (commit of commits) {
+    const {data: {items: [pullRequest]}} = await context.github.search.issues({q: commit.sha})
+    pulls.push(pullRequest)
+  }
+  pulls = chain(pulls).compact().uniqBy('number').value()
   
   console.log('\n\n\npulls', pulls)
 
