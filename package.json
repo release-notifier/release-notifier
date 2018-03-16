@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "probot run ./index.js",
-    "test": "standard --fix",
+    "test": "jest && standard --fix",
     "semantic-release": "semantic-release",
     "dev": "nodemon --exec 'npm start'",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "repository": "https://github.com/release-notifier/release-notifier",
   "keywords": [
@@ -20,14 +21,17 @@
   "author": "Zeke Sikelianos (http://zeke.sikelianos.com)",
   "license": "MIT",
   "dependencies": {
+    "dotenv-safe": "^5.0.1",
     "lodash": "^4.17.4",
+    "make-promises-safe": "^1.1.0",
     "probot": "^6.0.0",
     "semver": "^5.5.0"
   },
   "devDependencies": {
+    "jest": "^22.4.2",
     "nodemon": "^1.14.11",
+    "semantic-release": "^15.0.0",
     "standard": "^11.0.0",
-    "travis-deploy-once": "^4.3.3",
-    "semantic-release": "^15.0.0"
+    "travis-deploy-once": "^4.3.3"
   }
 }
