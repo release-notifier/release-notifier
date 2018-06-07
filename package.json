@@ -21,7 +21,7 @@
   "author": "Zeke Sikelianos (http://zeke.sikelianos.com)",
   "license": "MIT",
   "dependencies": {
-    "dotenv-safe": "^5.0.1",
+    "dotenv-safe": "^6.0.0",
     "lodash": "^4.17.4",
     "make-promises-safe": "^1.1.0",
     "probot": "^6.0.0",
