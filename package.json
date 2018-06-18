@@ -30,7 +30,7 @@
   "devDependencies": {
     "jest": "^22.4.2",
     "nodemon": "^1.14.11",
-    "semantic-release": "^15.0.0",
+    "semantic-release": "^15.5.5",
     "standard": "^11.0.0",
     "travis-deploy-once": "^4.3.3"
   },
