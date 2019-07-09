@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv-safe": "^5.0.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "make-promises-safe": "^1.1.0",
     "probot": "^6.0.0",
     "semver": "^5.5.0"
